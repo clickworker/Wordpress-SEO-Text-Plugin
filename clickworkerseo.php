@@ -171,7 +171,7 @@ function clickworker_seo_menu() {
 }
 
 function page($target) {
-
+    set_time_limit(0); 
     if (isset($_POST['accept'])) {
         require_once dirname(__FILE__) . '/sites/' . $target . '.php';
     } elseif (isset($_POST['adminOptionsSubmit'])) {
