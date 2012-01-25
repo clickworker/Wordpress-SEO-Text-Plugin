@@ -73,7 +73,7 @@ display_warnings();
         <div class="inside">
             <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 
-                This is version <?php echo VERSION; ?> | <a href="#" target="_blank">Charge your Account</a><br/>
+                This is version <?php echo VERSION; ?> | <a href="<?php echo "https://".CW_SERVER."/en/marketplace/payments/new"; ?>" target="_new">Charge your Account</a><br/>
 
                 <?php
                 if (!empty($customer)) {
@@ -100,7 +100,7 @@ display_warnings();
 
                 <br/>
 
-                You don’t have an account yet? <a href="#">Register now.</a><br/>
+                You don’t have an account yet? <a href="https://workplace.clickworker.com/marketplace/customers/new?register=true" target="_new">Register now.</a><br/>
 
                 <br/>
 
