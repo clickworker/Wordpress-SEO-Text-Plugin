@@ -2,22 +2,6 @@
 //Get saved options
 $devOptions = getOptions();
 
-if (isset($_POST['adminOptionsSubmit'])) { // If the form has been submitted
-    if (strlen($_POST['clickworker_username']) > 2) { // All usernames must be 3 or more characters long.
-        $devOptions["clickworker_username"] = $_POST['clickworker_username'];
-        $devOptions["clickworker_password"] = $_POST['clickworker_password'];
-        if (isset($_POST['clickworker_lowcredits'])) {
-            $devOptions["clickworker_lowcredits"] = 'true';
-        } else {
-            $devOptions["clickworker_lowcredits"] = 'false';
-        }
-
-        update_option(ADMINOPTIONNAME, $devOptions);
-    }
-}
-
-$customer = customer_check();
-
 //display api warnings
 display_warnings();
 ?>

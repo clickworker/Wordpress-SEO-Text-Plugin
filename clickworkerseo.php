@@ -2,7 +2,7 @@
 
 /*
   Plugin Name: Clickworker SEO Texts
-  Plugin URI: http://www.clickworker.com/wp-plugin
+  Plugin URI: https://github.com/clickworker/Wordpress-SEO-Text-Plugin
   Description: Order and buy Content created by clickworker.com
   Version: 0.93
   Author: M. Tomicki
@@ -40,7 +40,7 @@ if (!defined('Clickworker_SEO_Capability'))
 // Sandbox: https://sandbox.clickworker.com/api/marketplace/v2/
 // Sandbox beta: https://sandbox-beta.clickworker.com/api/marketplace/v2/
 if (!defined('CW_SERVER'))
-    define('CW_SERVER', "api.clickworker.com");
+    define('CW_SERVER', "sandbox.clickworker.com");
 
 // path to the api
 if (!defined('API_PATH'))
@@ -116,8 +116,7 @@ function display_warnings() {
     global $warnings;
     if (isset($warnings) && count($warnings) > 0) {
         foreach ($warnings as $value) {
-            echo "
-                <div id='clickworker-warning' class='updated fade'><p>
+            echo "<div id='clickworker-warning' class='updated fade'><p>
                 <strong>" . __('Attention!') . "</strong> " . sprintf($value) .
             "</p></div>";
         }
@@ -127,13 +126,19 @@ function display_warnings() {
 // check for customer variables on the remote system
 function customer_check() {
     global $warnings;
+    
+    $settings = getOptions();
+    
+    if (strlen($settings['clickworker_username']) < 2 || strlen($settings['clickworker_password']) < 2) {
+        array_push($warnings, 'To get started with the Clickworker SEO Text plugin, you need to <a href="admin.php?page=clickworker_seo_login">enter your credentials.</a>');
+        return;
+    } 
+    
     $customer_call = cw_command("customer", "GET");
 
     if (!is_wp_error($customer_call)) {
         $customer = json_decode($customer_call, true);
     }
-
-    $settings = getOptions();
 
     if (!empty($customer)) {
         $customer['username'] = $settings['clickworker_username'];
@@ -141,9 +146,7 @@ function customer_check() {
 
     $balance = $customer['customer_response']['customer']['$balance'];
 
-    if (strlen($settings['clickworker_username']) < 2 || strlen($settings['clickworker_password']) < 2) {
-        array_push($warnings, 'To get started with the Clickworker SEO Text plugin, you need to <a href="admin.php?page=clickworker_seo_login">enter your credentials.</a>');
-    } else if (is_wp_error($customer_call) && $customer_call->get_error_code() == '401') {
+    if (is_wp_error($customer_call) && $customer_call->get_error_code() == '401') {
         array_push($warnings, 'Your Clickworker login information appears to be incorrect. Please make sure to <a href="admin.php?page=clickworker_seo_login">enter valid credentials.</a>');
     } else {
         if ($settings['clickworker_lowcredits'] == 'true' && $balance < 10) { // change to a more suitable number once we are sure this works
@@ -157,24 +160,38 @@ function customer_check() {
 function clickworker_seo_menu() {
 
     if (function_exists('add_menu_page')) {
-
+          
         add_menu_page('Clickworker SEO-Texts', 'Clickworker SEO', Clickworker_SEO_Capability, "clickworker_seo", 'dashboard');
-
+        
+        add_submenu_page("clickworker_seo", 'Clickworker SEO Dashboard', 'Dashboard', Clickworker_SEO_Capability, "clickworker_seo", 'dashboard');
+        
         add_submenu_page("clickworker_seo", 'Clickworker SEO Login / Register', 'Setup', Clickworker_SEO_Capability, "clickworker_seo_login", 'login_page');
 
         add_submenu_page("clickworker_seo", 'Clickworker SEO Charge Account', 'Charge Account', Clickworker_SEO_Capability, "clickworker_seo_charge", 'charge_page');
 
-        add_submenu_page("clickworker_seo", 'Clickworker SEO Place Order', 'Request SEO Text', Clickworker_SEO_Capability, "clickworker_seo_order", 'order_page');
+        add_submenu_page("clickworker_seo", 'Clickworker SEO Place Order', 'Order SEO Text', Clickworker_SEO_Capability, "clickworker_seo_order", 'order_page');
 
-        add_submenu_page("clickworker_seo", 'Clickworker SEO Order Status', 'Progress Status', Clickworker_SEO_Capability, "clickworker_seo_status", 'status_page');
+        add_submenu_page("clickworker_seo", 'Clickworker SEO Order Status', 'Order Status', Clickworker_SEO_Capability, "clickworker_seo_status", 'status_page');
     }
 }
 
 function page($target) {
+   global $customer;
     set_time_limit(0); 
     if (isset($_POST['accept'])) {
         require_once dirname(__FILE__) . '/sites/' . $target . '.php';
     } elseif (isset($_POST['adminOptionsSubmit'])) {
+        if (strlen($_POST['clickworker_username']) > 2) { // All usernames must be 3 or more characters long.
+          $devOptions["clickworker_username"] = $_POST['clickworker_username'];
+          $devOptions["clickworker_password"] = $_POST['clickworker_password'];
+          if (isset($_POST['clickworker_lowcredits'])) {
+              $devOptions["clickworker_lowcredits"] = 'true';
+          } else {
+              $devOptions["clickworker_lowcredits"] = 'false';
+          }
+          update_option(ADMINOPTIONNAME, $devOptions);
+          $customer = customer_check();
+        }
         require_once dirname(__FILE__) . '/sites/styles.php';
         require_once dirname(__FILE__) . '/sites/' . $target . '.php';
     } else {
@@ -185,7 +202,17 @@ function page($target) {
 }
 
 function dashboard() {
-    page('dashboard');
+    global $customer;
+    if(!isset($_POST['adminOptionsSubmit'])){
+      $customer = customer_check();
+      
+    }
+
+    if(!empty($customer)) {
+        page('dashboard');
+    }else{
+      page('login');
+    }
 }
 
 function login_page() {
@@ -207,5 +234,7 @@ function price_page() {
 function charge_page() {
     page('charge');
 }
+
+
 
 ?>

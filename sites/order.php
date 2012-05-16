@@ -188,9 +188,6 @@ if (isset($_POST['newTaskSubmit']) || isset($_POST['priceCheck'])) { // If the o
     // If complete, populate the post with the appropriate data, remove metadata. Disable post button, display a form to grade the assignment. Accept will post the post, otherwise post is deleted + refund is given.
 }
 ?>
-
-<br/><br/>
-
 <div id="normal-sortables" class="meta-box-sortables ui-sortable">
 <?php display_warnings(); ?>
     <div id="poststuff" class="postbox" style="width: 50%;">
