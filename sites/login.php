@@ -65,14 +65,14 @@ display_warnings();
                 }
                 ?>
                 <br/>
-
+                
                 <strong>Username:</strong><br/>
 
-                <input type="text" id="clickworker_username" name="clickworker_username" value="<?php echo $devOptions['clickworker_username']; ?>" /><br/>
+                <input type="text" id="clickworker_username" autocomplete="off" name="clickworker_username" value="<?php if(!empty($devOptions['clickworker_username'])){ echo $devOptions['clickworker_username']; }else{echo "";}?>" /><br/>
 
                 <strong>Password:</strong><br/>
 
-                <input type="password" id="clickworker_password" name="clickworker_password" value="<?php echo $devOptions['clickworker_password']; ?>" /><br/>
+                <input type="password" id="clickworker_password" autocomplete="off" name="clickworker_password" value="<?php if(!empty($devOptions['clickworker_username'])){echo $devOptions['clickworker_password'];}else{echo "";} ?>" /><br/>
 
 
 

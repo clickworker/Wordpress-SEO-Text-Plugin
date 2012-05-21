@@ -40,7 +40,7 @@ if (!defined('Clickworker_SEO_Capability'))
 // Sandbox: https://sandbox.clickworker.com/api/marketplace/v2/
 // Sandbox beta: https://sandbox-beta.clickworker.com/api/marketplace/v2/
 if (!defined('CW_SERVER'))
-    define('CW_SERVER', "sandbox.clickworker.com");
+    define('CW_SERVER', "api.clickworker.com");
 
 // path to the api
 if (!defined('API_PATH'))
@@ -99,12 +99,18 @@ function cw_command($url, $method, $data="", $longurl = false) {
     } else {
         $response = wp_remote_request($url, $opts);
     }
-
     if (is_wp_error($response)) {
-        array_push($warnings, $response->get_error_code() . " " . $response->get_error_message());
-        return "";
+      
+          array_push($warnings, $response->get_error_code() . " " . $response->get_error_message());
+          return "";
+          
     } elseif ($response['response']['code'] != 200) {
-        array_push($warnings, CW_SERVER . " encountered a problem: " . $response['response']['code'] . " " . $response['response']['message']);
+      
+          if ( $response['response']['code'] == '401') {
+            array_push($warnings, 'Your Clickworker login information appears to be incorrect. Please make sure to <a href="admin.php?page=clickworker_seo_login">enter valid credentials.</a>');
+          } else {
+            array_push($warnings, CW_SERVER . " encountered a problem: " . $response['response']['code'] . " " . $response['response']['message']);
+          }
         return "";
     } else {
         return $response['body'];
@@ -142,18 +148,13 @@ function customer_check() {
 
     if (!empty($customer)) {
         $customer['username'] = $settings['clickworker_username'];
-    }
+        $balance = $customer['customer_response']['customer']['$balance'];
 
-    $balance = $customer['customer_response']['customer']['$balance'];
-
-    if (is_wp_error($customer_call) && $customer_call->get_error_code() == '401') {
-        array_push($warnings, 'Your Clickworker login information appears to be incorrect. Please make sure to <a href="admin.php?page=clickworker_seo_login">enter valid credentials.</a>');
-    } else {
         if ($settings['clickworker_lowcredits'] == 'true' && $balance < 10) { // change to a more suitable number once we are sure this works
-            array_push($warnings, "The balance on your Clickworker account is running low. Be sure to log into Clickworker to increase your balance.");
+               array_push($warnings, "The balance on your Clickworker account is running low. Be sure to log into Clickworker to increase your balance.");
         }
-        return $customer;
-    }
+     }
+    return $customer;
 }
 
 // add subpages
@@ -195,7 +196,9 @@ function page($target) {
         require_once dirname(__FILE__) . '/sites/styles.php';
         require_once dirname(__FILE__) . '/sites/' . $target . '.php';
     } else {
+      if(!empty($customer)) {
         $customer = customer_check();
+      }
         require_once dirname(__FILE__) . '/sites/styles.php';
         require_once dirname(__FILE__) . '/sites/' . $target . '.php';
     }
@@ -207,7 +210,6 @@ function dashboard() {
       $customer = customer_check();
       
     }
-
     if(!empty($customer)) {
         page('dashboard');
     }else{
