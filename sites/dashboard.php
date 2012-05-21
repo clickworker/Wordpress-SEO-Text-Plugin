@@ -10,8 +10,6 @@ display_warnings();
 
 <h2>Dashboard</h2>
 
-
-
 <div id="normal-sortables">
 
     <div id="poststuff" class="postbox" style="width: 50%;">
@@ -40,7 +38,7 @@ display_warnings();
                 if (!empty($customer)) {
                     echo " " . $customer['customer_response']['customer']['balance_amount'] . " " . $customer['customer_response']['customer']['currency_code'];
                 }
-?> </strong> <a href="#">Charge your Account</a><br/>
+?> </strong> <a href="<?php echo "https://".CW_SERVER."/en/marketplace/payments/new"; ?>" target="_new">Charge your Account</a><br/>
 
             </label>
 
@@ -107,7 +105,7 @@ display_warnings();
             <div class="clear"></div>
 
             <div class="submit">
-                <a href="http://www.clickworker.com/product-wizard/">
+                <a href="http://www.clickworker.com/en/unique-seo-content/" target="_new">
                     <input type="submit" name="save" accesskey="p" id="adminOptionsSubmit" value="See Prices" class="button-primary" name="adminOptionsSubmit" value="','" />
                 </a>
             </div>

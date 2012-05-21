@@ -2,22 +2,6 @@
 //Get saved options
 $devOptions = getOptions();
 
-if (isset($_POST['adminOptionsSubmit'])) { // If the form has been submitted
-    if (strlen($_POST['clickworker_username']) > 2) { // All usernames must be 3 or more characters long.
-        $devOptions["clickworker_username"] = $_POST['clickworker_username'];
-        $devOptions["clickworker_password"] = $_POST['clickworker_password'];
-        if (isset($_POST['clickworker_lowcredits'])) {
-            $devOptions["clickworker_lowcredits"] = 'true';
-        } else {
-            $devOptions["clickworker_lowcredits"] = 'false';
-        }
-
-        update_option(ADMINOPTIONNAME, $devOptions);
-    }
-}
-
-$customer = customer_check();
-
 //display api warnings
 display_warnings();
 ?>
@@ -73,7 +57,7 @@ display_warnings();
         <div class="inside">
             <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 
-                This is version <?php echo VERSION; ?> | <a href="#" target="_blank">Charge your Account</a><br/>
+                This is version <?php echo VERSION; ?> | <a href="<?php echo "https://".CW_SERVER."/en/marketplace/payments/new"; ?>" target="_new">Charge your Account</a><br/>
 
                 <?php
                 if (!empty($customer)) {
@@ -81,14 +65,14 @@ display_warnings();
                 }
                 ?>
                 <br/>
-
+                
                 <strong>Username:</strong><br/>
 
-                <input type="text" id="clickworker_username" name="clickworker_username" value="<?php echo $devOptions['clickworker_username']; ?>" /><br/>
+                <input type="text" id="clickworker_username" autocomplete="off" name="clickworker_username" value="<?php if(!empty($devOptions['clickworker_username'])){ echo $devOptions['clickworker_username']; }else{echo "";}?>" /><br/>
 
                 <strong>Password:</strong><br/>
 
-                <input type="password" id="clickworker_password" name="clickworker_password" value="<?php echo $devOptions['clickworker_password']; ?>" /><br/>
+                <input type="password" id="clickworker_password" autocomplete="off" name="clickworker_password" value="<?php if(!empty($devOptions['clickworker_username'])){echo $devOptions['clickworker_password'];}else{echo "";} ?>" /><br/>
 
 
 
@@ -100,7 +84,7 @@ display_warnings();
 
                 <br/>
 
-                You don’t have an account yet? <a href="#">Register now.</a><br/>
+                You don’t have an account yet? <a href="https://workplace.clickworker.com/marketplace/customers/new?register=true" target="_new">Register now.</a><br/>
 
                 <br/>
 

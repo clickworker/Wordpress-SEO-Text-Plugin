@@ -88,7 +88,7 @@ display_warnings();
 
 <br/><br/>
 
-<h2>Assignments</h2>
+<h2>Order Status</h2>
 <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]?>&noheader=true" >
 <table class="wp-list-table widefat fixed posts" cellspacing="0"  style="width: 50%;">
 
@@ -98,11 +98,9 @@ display_warnings();
 
         <tr>
 
-            <th scope="col" id="title" class="manage-column column-title sortable desc" style=""><a href="http://localhost:8888/wp-admin/edit.php?orderby=title&amp;order=asc"><span>titel</span><span class="sorting-indicator"></span></a></th>
+            <th scope="col" id="title" class="manage-column column-title sortable desc" style="">Title</th>
 
-            <th scope="col" id="id" class="manage-column column-categories sortable desc" style=""><a href="http://localhost:8888/wp-admin/edit.php?orderby=id&amp;order=asc"><span>Link</span><span class="sorting-indicator"></span></a></th>
-
-            <th scope="col" id="status" class="manage-column column-author sortable desc" style="width:200px;"><a href="http://localhost:8888/wp-admin/edit.php?orderby=author&amp;order=asc"><span>status</span><span class="sorting-indicator"></span></a></th>
+            <th scope="col" id="status" class="manage-column column-author sortable desc" style="width:200px;">Status</th>
 
 
 
@@ -115,18 +113,20 @@ display_warnings();
 
 <?php
 $call = cw_command("customer/tasks/", "GET");
+
+
 if (!empty($call)) {
     $arr = json_decode($call, true);
     $tasks = $arr['tasks_response']['tasks'];
     if (count($tasks) > 0) {
         foreach ($tasks as $theTask) {
-
+     
             $link =  $theTask['link'][0]['href'];
 
             echo '<tr id="post-7553" class="alternate author-other status-publish format-default iedit" valign="top">';
             echo "<tr>";
             echo '<td class="post-title page-title column-title"><strong>' . $theTask['customer_ref'] . "</strong></td>";
-            echo '<td class="categories column-categories"><a href="'.$link.'">Link</a></td>';
+
             echo '<td  class="author column-author">' . $theTask['state'] . "</td>";
             echo "</tr>";
         }
