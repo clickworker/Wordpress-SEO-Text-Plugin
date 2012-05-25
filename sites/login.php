@@ -27,7 +27,7 @@ display_warnings();
             <div class="clear"></div>
 
             <div class="submit">
-                <a target="_new" href="https://<?php echo CW_SERVER; ?>/de/marketplace/customers/new">
+                <a target="_new" href="https://<?php echo CW_SERVER; ?>/marketplace/customers/new">
                 <input type="submit" name="save" accesskey="p" id="adminOptionsSubmit" value="Register now" class="button-primary" name="adminOptionsSubmit" value="','" />
                 </a>
             </div>

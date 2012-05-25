@@ -7,11 +7,11 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-’clickworker.com SEO’ enables you to order search machine optimized texts by means of your Wordpress account in just a few easy steps.
+clickworker.com SEO enables you to order search machine optimized texts by means of your Wordpress account in just a few easy steps.
 
 == Description ==
 
-’clickworker.com SEO’ enables you to order search machine optimized texts by means of your Wordpress account in just a few easy steps. Texts are written and ready for use within a short space of time and can be directly imported as new content onto your web pages. 
+clickworker.com SEO enables you to order search machine optimized texts by means of your Wordpress account in just a few easy steps. Texts are written and ready for use within a short space of time and can be directly imported as new content onto your web pages. 
 You can order unique content texts varying in length between 5 and 1200 words and in 13 languages. The texts will be written according to your exact specifications and will include the desired density of keywords provided by you. 
 A pool of over 65,000 qualified freelance authors from our Crowd are at your disposal. As a result, any number of top-quality texts can be written within a very short space of time.
 All of the SEO texts that are written will be screened for duplicates, correct text length and keyword density. In addition, texts will also be checked for correct content, spelling, grammar and style if requested. 
