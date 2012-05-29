@@ -4,7 +4,7 @@
   Plugin Name: Clickworker SEO Texts
   Plugin URI: https://github.com/clickworker/Wordpress-SEO-Text-Plugin
   Description: Order and buy Content created by clickworker.com
-  Version: 0.93
+  Version: 0.94
   Author: M. Tomicki
   Author URI: http://www.clickworker.com/about-us/team
 
@@ -17,7 +17,7 @@
  */
 
 if (!defined('VERSION'))
-    define('VERSION', "0.93");
+    define('VERSION', "0.94");
 
 //check for/ right scope
 
@@ -168,9 +168,9 @@ function clickworker_seo_menu() {
         
         add_submenu_page("clickworker_seo", 'Clickworker SEO Login / Register', 'Setup', Clickworker_SEO_Capability, "clickworker_seo_login", 'login_page');
 
-        add_submenu_page("clickworker_seo", 'Clickworker SEO Charge Account', 'Charge Account', Clickworker_SEO_Capability, "clickworker_seo_charge", 'charge_page');
-
         add_submenu_page("clickworker_seo", 'Clickworker SEO Place Order', 'Order SEO Text', Clickworker_SEO_Capability, "clickworker_seo_order", 'order_page');
+        
+        add_submenu_page("clickworker_seo", 'Clickworker SEO Charge Account', 'Charge Account', Clickworker_SEO_Capability, "clickworker_seo_charge", 'charge_page');
 
         add_submenu_page("clickworker_seo", 'Clickworker SEO Order Status', 'Order Status', Clickworker_SEO_Capability, "clickworker_seo_status", 'status_page');
     }

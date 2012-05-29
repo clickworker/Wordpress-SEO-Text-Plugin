@@ -12,8 +12,31 @@ if (isset($_POST['newTaskSubmit']) || isset($_POST['priceCheck'])) { // If the o
     global $warnings;
     $minKeyWords = $_POST['cw_seotext_keywords_min'];
     $maxKeyWords = $_POST['cw_seotext_keywords_max'];
-
-
+    $vali_error  = false;
+    
+    //Form Validation
+    if (empty($_POST['cw_seotext_topic']) || $_POST['cw_seotext_topic'] == "Enter topic here"){
+      echo "<div class='updated fade'><p>
+                <strong>" . __('Attention!') . "</strong> " .
+                "Please enter a topic for your order.".
+            "</p></div>";
+       $vali_error = true;
+    }
+     if (empty($keyword_a) || $keyword_a == "Enter up to three comma separated keywords"){
+             echo "<div class='updated fade'><p>
+                <strong>" . __('Attention!') . "</strong> " .
+                "Enter at least one keyword.".
+            "</p></div>";
+        $vali_error = true;
+    }
+    if(empty($_POST['cw_seotext_description'])  ){
+       echo "<div class='updated fade'><p>
+                <strong>" . __('Attention!') . "</strong> " .
+                "The field \"Instruction for the author\" can't be blank, Try to explain the task to the Clickworkers as detailed as possible. At least 20 words.".
+            "</p></div>";
+        $vali_error = true;
+    }
+    if($vali_error == false){
     $time = time();
     if (isset($_POST['qualityControl'])) {
         $quality = "textcreate_proof_yes";
@@ -172,6 +195,7 @@ if (isset($_POST['newTaskSubmit']) || isset($_POST['priceCheck'])) { // If the o
             }
         }
     }
+    }
     //$arr = json_decode($data, true);
     //var_dump( $arr);
     // For debugging purposes: 
@@ -203,7 +227,7 @@ if (isset($_POST['newTaskSubmit']) || isset($_POST['priceCheck'])) { // If the o
 
 
 <?php
-if (!isset($_POST['priceCheck'])) {
+if (!isset($_POST['priceCheck']) || $vali_error) {
     ?>
                     <div style="width: 500px; ">
                         <strong>Language:</strong><br/>
@@ -314,7 +338,7 @@ if (!isset($_POST['priceCheck'])) {
                     </div>
 <?php } ?>
 <?php
-if (isset($_POST['priceCheck'])) {
+if (isset($_POST['priceCheck']) && !$vali_error) {
     ?>
 
                     <strong>Language</strong><br/>
