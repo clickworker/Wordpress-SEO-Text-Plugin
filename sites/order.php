@@ -13,7 +13,7 @@ if (isset($_POST['newTaskSubmit']) || isset($_POST['priceCheck'])) { // If the o
     $minKeyWords = $_POST['cw_seotext_keywords_min'];
     $maxKeyWords = $_POST['cw_seotext_keywords_max'];
     $vali_error  = false;
-    
+
     //Form Validation
     if (empty($_POST['cw_seotext_topic']) || $_POST['cw_seotext_topic'] == "Enter topic here"){
       echo "<div class='updated fade'><p>
@@ -47,8 +47,8 @@ if (isset($_POST['newTaskSubmit']) || isset($_POST['priceCheck'])) { // If the o
     $template = array("task_template" =>
         array("code" => "tpl_text_create_keywords_" . $_POST['cw_language'] . "_" . $time,
             "name" => "Wordpress APIClient SEO-Text (" . $_POST['cw_language'] . ")",
-            "titles" => array($_POST['cw_language'] => $_POST['cw_seotext_topic']),
-            "descriptions" => array($_POST['cw_language'] => $_POST['cw_seotext_description']),
+            "titles" => array('en' => $_POST['cw_seotext_topic'],'de' => $_POST['cw_seotext_topic']),
+            "descriptions" => array('en' => $_POST['cw_seotext_description'],'de' => $_POST['cw_seotext_description']),
             "product" => array("link" => array(
                     "href" => "/api/marketplace/v2/products/TextCreateWithKeywords",
                     "rel" => "product",
@@ -68,7 +68,7 @@ if (isset($_POST['newTaskSubmit']) || isset($_POST['priceCheck'])) { // If the o
             ),
             "form" => array("elements" => array(
                     array("type" => "text_field",
-                        "titles" => array($_POST['cw_language'] => "Title"),
+                        "titles" => array("en" => "Title", "de" => "Titel"),
                         "item_code" => "title",
                         "is_output" => false,
                         "is_mandatory" => true,
@@ -88,7 +88,7 @@ if (isset($_POST['newTaskSubmit']) || isset($_POST['priceCheck'])) { // If the o
                         )
                     ),
                     array("type" => "keyword",
-                        "titles" => array($_POST['cw_language'] => "Keyword A"),
+                        "titles" => array('en' => "Keyword A",'de' => "Keyword A"),
                         "item_code" => "keyword_a",
                         "is_output" => false,
                         "is_mandatory" => true,
@@ -106,7 +106,7 @@ if (isset($_POST['newTaskSubmit']) || isset($_POST['priceCheck'])) { // If the o
     if ($keyword_b != "") {
 
         $add = array("type" => "keyword",
-            "titles" => array($_POST['cw_language'] => "Keyword B"),
+            "titles" => array('en' => "Keyword B",'de' => "Keyword B"),
             "item_code" => "keyword_b",
             "is_output" => false,
             "is_mandatory" => true,
@@ -121,7 +121,7 @@ if (isset($_POST['newTaskSubmit']) || isset($_POST['priceCheck'])) { // If the o
     }
     if ($keyword_c != "") {
         $add = array("type" => "keyword",
-            "titles" => array($_POST['cw_language'] => "Keyword C"),
+            "titles" => array('en' => "Keyword C",'en' => "Keyword C"),
             "item_code" => "keyword_c",
             "is_output" => false,
             "is_mandatory" => true,
@@ -237,7 +237,28 @@ if (!isset($_POST['priceCheck']) || $vali_error) {
 
                             <option value="de">German</option>
 
-                            <!--<option value="fr">French</option> --> <!-- Currently results in a "404" -->
+                            <option value="fr">French</option>
+                            
+                            <option value="es">Spanish</option>
+                            
+                            <option value="pl">Polish</option>
+
+                            <option value="pt">Portuguese</option>
+                            
+                            <option value="tr">Turkish</option>
+                            
+                            <option value="it">Italian</option>
+                            
+                            <option value="cs">Czech</option>
+                            
+                            <option value="nl">Dutch</option>
+                            
+                            <option value="ru">Russian</option>
+                            
+                            <option value="hu">Hungarian</option>
+                            
+                            <option value="ro">Romanian</option>
+                            
 
                         </select>
 
