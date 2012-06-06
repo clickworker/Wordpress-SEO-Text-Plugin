@@ -38,6 +38,48 @@ Die Kommunikation zwischen clickworker.com und Ihrer Applikation erfolgt per SSL
 
 Mehr Informationen zu clickworker.com erhalten Sie auf: http://www.clickworker.com/
 
+== Frequently Asked Questions ==
+
+= What is the first step after installing the plug-in? =
+After successfully installing and activating the plug-in in your WordPress account, please register as a client at clickworker.com (if you have not done so yet) in order to generate your username and password.
+Please use this access data to log into the “clickworker.com SEO“ plug-ins.
+You can also login directly on the clickworker.com platform at www.clickworker.com? and access your customer account as needed, for example 
+* to charge your account or 
+* download your invoice under the menu item “Account/My invoices”
+
+= Where can I get support or report a bug? =
+If you need support or want to report a bug, please write us a short email at: SeoPlugin@clickworker.com.
+We will respond to your inquiry as soon as possible.
+
+= How is my order processed? =
+Your text order appears directly on our order platform. From there it is handled by qualified authors only, who are registered on our platform to process orders. One of the qualified authors will accept the order, process it according to your instructions and after completion, place the newly created text on the platform.
+
+= How can I assure that the results meet my requirements? =
+As soon as the order is completed you can see the results and check if your requirements have been met. During order placement you have the option of choosing internal quality controls. One way to do this is to have an editor, a second person who proofreads and, if necessary, corrects the work of the author. If you chose to use this option „Enable Quality Control“ you will receive the finished product only after it has been checked by the editor.
+
+
+= How can I be sure that the texts I receive do not violate someone’s copyrights? =
+As our client you receive all usage rights for your content. We also utilize copyscape.com for all text deliverables to check for plagiarism.
+
+= How long does it typically take before I receive my completed text order? =
+Processing time can vary greatly depending on the order. For the most part, short texts are usually written within just a few days. Longer text may require more time, mostly depending on the amount of research the author has to do.
+
+= How do I receive the results of my order? =
+You will get a notice via e-mail as soon as the text is done. Please ignore the link shown on the e-mail but have a look at your clickworker.com SEO Plugin. Every text ordered is shown under "Order Status" with its actual order status. 
+
+Orders can have three different states:
+*	queued: your order is currently awaiting processing by our clickworkers.
+*	running: Your order is currently processed by our clickworkers.
+*	feedback: Your order was processed by our clickworkers and is now ready for your approval.
+If any of your orders is at the state “feedback”, it will occur at the “Customer jobs” section. Just click at the plus sign at front of the job title.
+
+The authors text result will be shown together with a rating matrix. Please rate the spelling/grammar, the style/structure and if the text matches the given topic. 
+
+If you have accepted the result, the text will be automatically forwarded to the new article view of WordPress for further formatting and editing.
+
+= What Payment Methods can I use? =
+Clickworker.com supports payment through PayPal, wire transfer, credit and debit.
+
 
 == Installation ==
 
@@ -56,4 +98,10 @@ Added additional languages for orders.
 = 0.94 =
 Added validation for order fields.
 
+== Upgrade Notice ==
 
+= 0.95 =
+Added additional languages for orders.
+
+= 0.94 =
+Added validation for order fields.
