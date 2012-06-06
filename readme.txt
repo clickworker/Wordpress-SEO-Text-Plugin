@@ -1,4 +1,4 @@
-=== clickworker.com SEO ===
+ï»¿=== clickworker.com SEO ===
 Contributors: mandrae
 Tags: SEO, SEO Text, Unique Content, text creation, content creation, content, search engine optimization, text optimization, content optimization, optimized texts, Crowdsourcing, clickworker, clickworker.com, humangrid
 Requires at least: 2.7.0
@@ -26,15 +26,15 @@ For more information visit http://www.clickworker.com/
 
 **Deutsch:**
 
-clickworker.com SEO ermöglicht Ihnen suchmaschinenoptimierte Texte über Ihren Wordpress-Account in wenigen Schritten zu bestellen. Die zeitnah fertig erstellten Texte können direkt, als neuer Content, auf Ihre Webseiten eingespielt werden.
-Bestellt werden können einzigartige Texte in Längen von 5 - 1200 Wörtern und in 13 Sprachen. Die Texte werden genau nach Ihren Vorgaben erstellt, mit den von Ihnen vorgegebenen Keywords und der gewünschten Dichte. 
-Als Autoren stehen Ihnen 65.000 qualifizierten Freelancer aus unserer Crowd zur Verfügung. Mit mit dieser Stärke können beliebig viele Texte innerhalb kürzester Zeit qualitativ hochwertig erstellt werden.
-Alle geschriebenen SEO-Texte werden auf Duplikate, korrekte Textlänge und Keyworddichte überprüft. Zudem werden die Texte auf Wunsch noch bez. inhaltlicher Richtigkeit, Rechtschreibung, Grammatik und Stil kontrolliert.
+clickworker.com SEO ermÃ¶glicht Ihnen suchmaschinenoptimierte Texte Ã¼ber Ihren Wordpress-Account in wenigen Schritten zu bestellen. Die zeitnah fertig erstellten Texte kÃ¶nnen direkt, als neuer Content, auf Ihre Webseiten eingespielt werden.
+Bestellt werden kÃ¶nnen einzigartige Texte in LÃ¤ngen von 5 - 1200 WÃ¶rtern und in 13 Sprachen. Die Texte werden genau nach Ihren Vorgaben erstellt, mit den von Ihnen vorgegebenen Keywords und der gewÃ¼nschten Dichte. 
+Als Autoren stehen Ihnen 65.000 qualifizierten Freelancer aus unserer Crowd zur VerfÃ¼gung. Mit mit dieser StÃ¤rke kÃ¶nnen beliebig viele Texte innerhalb kÃ¼rzester Zeit qualitativ hochwertig erstellt werden.
+Alle geschriebenen SEO-Texte werden auf Duplikate, korrekte TextlÃ¤nge und Keyworddichte Ã¼berprÃ¼ft. Zudem werden die Texte auf Wunsch noch bez. inhaltlicher Richtigkeit, Rechtschreibung, Grammatik und Stil kontrolliert.
 
-Als Schnittstelle, zur Übertragung Ihrer Auftragsdaten von WordPress auf die Plattform von clickworker.com und der fertigen Texte in Ihr WordPress-System, wird das REST-based Application Programming Interface (API) von clickworker.com eingesetzt. 
-Die Kommunikation zwischen clickworker.com und Ihrer Applikation erfolgt per SSL und ist durch Login und Passwort geschützt. 
+Als Schnittstelle, zur Ãœbertragung Ihrer Auftragsdaten von WordPress auf die Plattform von clickworker.com und der fertigen Texte in Ihr WordPress-System, wird das REST-based Application Programming Interface (API) von clickworker.com eingesetzt. 
+Die Kommunikation zwischen clickworker.com und Ihrer Applikation erfolgt per SSL und ist durch Login und Passwort geschÃ¼tzt. 
 
-**Das Plugin steht offen für weitere Optimierungen und neue Features ganz nach Ihrem Bedarf. Auf der Open Source Plattform https://github.com/clickworker/Wordpress-SEO-Text-Plugin können Sie das Plugin nach Ihren Bedürfnissen selber erweitern oder nützliche Tipps und Feedbacks für die Entwickler abgeben.**
+**Das Plugin steht offen fÃ¼r weitere Optimierungen und neue Features ganz nach Ihrem Bedarf. Auf der Open Source Plattform https://github.com/clickworker/Wordpress-SEO-Text-Plugin kÃ¶nnen Sie das Plugin nach Ihren BedÃ¼rfnissen selber erweitern oder nÃ¼tzliche Tipps und Feedbacks fÃ¼r die Entwickler abgeben.**
 
 Mehr Informationen zu clickworker.com erhalten Sie auf: http://www.clickworker.com/
 
@@ -58,7 +58,7 @@ Your text order appears directly on our order platform. From there it is handled
 As soon as the order is completed you can see the results and check if your requirements have been met. During order placement you have the option of choosing internal quality controls. One way to do this is to have an editor, a second person who proofreads and, if necessary, corrects the work of the author. If you chose to use this option Enable Quality Control you will receive the finished product only after it has been checked by the editor.
 
 
-= How can I be sure that the texts I receive do not violate someone’s copyrights? =
+= How can I be sure that the texts I receive do not violate someoneâ€™s copyrights? =
 As our client you receive all usage rights for your content. We also utilize copyscape.com for all text deliverables to check for plagiarism.
 
 = How long does it typically take before I receive my completed text order? =
