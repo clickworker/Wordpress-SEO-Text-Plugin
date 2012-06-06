@@ -42,10 +42,10 @@ Mehr Informationen zu clickworker.com erhalten Sie auf: http://www.clickworker.c
 
 = What is the first step after installing the plug-in? =
 After successfully installing and activating the plug-in in your WordPress account, please register as a client at clickworker.com (if you have not done so yet) in order to generate your username and password.
-Please use this access data to log into the “clickworker.com SEO“ plug-ins.
+Please use this access data to log into the clickworker.com SEO plug-ins.
 You can also login directly on the clickworker.com platform at www.clickworker.com? and access your customer account as needed, for example 
 * to charge your account or 
-* download your invoice under the menu item “Account/My invoices”
+* download your invoice under the menu item Account/My invoices
 
 = Where can I get support or report a bug? =
 If you need support or want to report a bug, please write us a short email at: SeoPlugin@clickworker.com.
@@ -55,7 +55,7 @@ We will respond to your inquiry as soon as possible.
 Your text order appears directly on our order platform. From there it is handled by qualified authors only, who are registered on our platform to process orders. One of the qualified authors will accept the order, process it according to your instructions and after completion, place the newly created text on the platform.
 
 = How can I assure that the results meet my requirements? =
-As soon as the order is completed you can see the results and check if your requirements have been met. During order placement you have the option of choosing internal quality controls. One way to do this is to have an editor, a second person who proofreads and, if necessary, corrects the work of the author. If you chose to use this option „Enable Quality Control“ you will receive the finished product only after it has been checked by the editor.
+As soon as the order is completed you can see the results and check if your requirements have been met. During order placement you have the option of choosing internal quality controls. One way to do this is to have an editor, a second person who proofreads and, if necessary, corrects the work of the author. If you chose to use this option Enable Quality Control you will receive the finished product only after it has been checked by the editor.
 
 
 = How can I be sure that the texts I receive do not violate someone’s copyrights? =
@@ -68,10 +68,10 @@ Processing time can vary greatly depending on the order. For the most part, shor
 You will get a notice via e-mail as soon as the text is done. Please ignore the link shown on the e-mail but have a look at your clickworker.com SEO Plugin. Every text ordered is shown under "Order Status" with its actual order status. 
 
 Orders can have three different states:
-*	queued: your order is currently awaiting processing by our clickworkers.
-*	running: Your order is currently processed by our clickworkers.
-*	feedback: Your order was processed by our clickworkers and is now ready for your approval.
-If any of your orders is at the state “feedback”, it will occur at the “Customer jobs” section. Just click at the plus sign at front of the job title.
+* queued: your order is currently awaiting processing by our clickworkers.
+* running: Your order is currently processed by our clickworkers.
+* feedback: Your order was processed by our clickworkers and is now ready for your approval.
+If any of your orders is at the state feedback, it will occur at the Customer jobs section. Just click at the plus sign at front of the job title.
 
 The authors text result will be shown together with a rating matrix. Please rate the spelling/grammar, the style/structure and if the text matches the given topic. 
 
