@@ -5,7 +5,7 @@
   Plugin URI: https://github.com/clickworker/Wordpress-SEO-Text-Plugin
   Description: Order and buy Content created by clickworker.com
   Version: 0.95
-  Author: M. Tomicki
+  Author: clickworker.com
   Author URI: http://www.clickworker.com/about-us/team
 
   Prototype by: S.D.Moufarrege
