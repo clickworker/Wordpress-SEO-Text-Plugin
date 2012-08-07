@@ -96,6 +96,10 @@ Clickworker.com supports payment through PayPal, wire transfer, credit and debit
 
 == Changelog == 
 
+= 0.96 =
+
+Test
+
 = 0.95 =
 Added additional languages for orders.
 
