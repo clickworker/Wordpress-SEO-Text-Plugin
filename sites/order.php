@@ -403,7 +403,8 @@ if (isset($_POST['priceCheck']) && !$vali_error) {
 
                     <strong>Language</strong><br/>
                     <div style="width: 500px; ">
-                        <input type="text" readonly="readonly" id="cw_langage" name="cw_language" value="<?php echo $_POST['cw_language'] ?>" />
+                        <input type="text" readonly="readonly" id="cw_langage_temp" name="cw_language_temp" value="<?php echo get_language($_POST['cw_language']); ?>" />
+                        <input type="hidden" id="cw_langage" name="cw_language" value="<?php echo $_POST['cw_language']; ?>" />
                     </div>
 
                     <br/>
@@ -501,5 +502,27 @@ function get_text_length($str){
 		case "1001#1210": $res = "1001 - 1200 words"; break;
 	}
 	return $res;
+}
+
+function get_language($str){
+	$language = "";
+	
+	switch($str){
+		case "en": $language = "English"; break;
+		case "de": $language = "German"; break;
+		case "fr": $language = "French"; break;
+		case "es": $language = "Spanish"; break;
+		case "pl": $language = "Polish"; break;
+		case "pt": $language = "Portuguese"; break;
+		case "tr": $language = "Turkish"; break;
+		case "it": $language = "Italian"; break;
+		case "cs": $language = "Czech"; break;
+		case "nl": $language = "Dutch"; break;
+		case "ru": $language = "Russian"; break;
+		case "hu": $language = "Hungarian"; break;
+		case "ro": $language = "Romanian"; break;
+	}
+	
+	return $language;
 }
 ?>

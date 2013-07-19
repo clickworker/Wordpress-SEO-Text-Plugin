@@ -172,8 +172,6 @@ function clickworker_seo_menu() {
         add_submenu_page("clickworker_seo", 'Clickworker SEO Charge Account', 'Charge Account', Clickworker_SEO_Capability, "clickworker_seo_charge", 'charge_page');
 
         add_submenu_page("clickworker_seo", 'Clickworker SEO Order Status', 'Order Status', Clickworker_SEO_Capability, "clickworker_seo_status", 'status_page');
-
-        //add_submenu_page("clickworker_seo", 'Clickworker SEO Task Download', '', Clickworker_SEO_Capability, "clickworker_task_download", 'download_page');
     }
 }
 
@@ -233,15 +231,96 @@ function status_page() {
 function price_page() {
     page('status');
 }
-/*
-function download_page() {
-	page('download');
-}
-*/
+
 function charge_page() {
     page('charge');
 }
 
+function get_link_for_state($state, $link){
+	$id = get_id_from_link($link);
+	$download_link = "&nbsp;";
+
+	if($state == "feedback")
+	{
+		$download_link = get_link_to_accept($id);
+	}
+
+	return $download_link;
+}
+
+function get_only_link_for_state($state, $div_task_id){
+	$label = $state;
+
+	if($state == "feedback"){
+		$label = "<a onclick='jQuery(\"#task_$div_task_id\").toggle(\"slow\");'><strong>review needed</strong></a>";
+	}
+	return $label;
+}
+
+function get_link_to_accept($id){
+	$link = "";
+
+	$call = cw_command("customer/jobs/", "GET");
+	if (!empty($call)) {
+		$arr = json_decode($call, true);
+		$jobs = $arr['jobs_response']['jobs'];
+
+		$divNumber = 0;
+		if (count($jobs) > 0) {
+			foreach ($jobs as $job) {
+				$call = cw_command($job['link'][0]['href'], "GET","",true);
+				$arr = json_decode($call, true);
+
+				if(get_id_from_link($job['task']['link'][0]['href']) != $id){ continue; }
+				 
+				$link .= "<strong>". $arr['job_response']['job']['items'][0]['content'] . "</strong>";
+				$link .= "<div id=\"task_$id\" style=\"margin-left:1em;\">";
+
+				$link .= "<label for='spelling_score'>Result:</label>";
+	      
+				$link .= "<div class='bordered_div'>" . $arr['job_response']['job']['items'][1]['content'] . "</div>";
+				 
+						$link .= "<input type='hidden' name='job_id' id='job_id' value=' " . $arr['job_response']['job']['link'][0]['href'] . "' />" .
+								"<input type='hidden' name='post_title' id='post_title' value='" . $arr['job_response']['job']['items'][0]['content'] . "' />" .
+								"<input type='hidden' name='post_content' id='post_content' value='" . $arr['job_response']['job']['items'][1]['content'] . "' />";
+
+										$link .= "<label for='spelling_score'>Spelling/Grammar:</label>
+				<select name='spelling_score' id='spelling_score'>
+					  		<option value='0'>poor</option>
+					  		<option value='1'>acceptable</option>
+					  		<option value='2' selected='selected'>good</option>
+				  		</select><br />
+			  		<label for='style_score'>Style and Structure:</label>
+			  		<select name='style_score' id='style_score'>
+				  		<option value='0'>poor</option>
+				  		<option value='1'>acceptable</option>
+				  		<option value='2' selected='selected'>good</option>
+                    </select><br />
+                    <label for='topic_score'>Topic met?</label>
+                    <select name='topic_score' id='topic_score'>
+                        <option value='0'>no</option>
+                        <option value='1'>more or less</option>
+                        <option value='2' selected='selected'>yes</option>
+                    </select><br />
+                    <label for='comment'>Comment:</label>
+                    <textarea id='comment' name='comment'></textarea>
+                    <br />
+                    <input type='submit' name='accept' id='accept' value='Accept' />
+                    <input type='submit' name='reject' id='reject' value='Reject' />
+  				</div>";
+			}
+	    }
+	} else {
+	    $link = "Error while retrieving API Data";
+	}
+
+	return $link;
+}
+
+function get_id_from_link($link){
+	$exploded = split('/', $link);
+				return ($exploded[sizeof($exploded) - 1]);
+}
 
 
 ?>

@@ -93,8 +93,7 @@ display_warnings();
     <thead>
         <tr>
             <th scope="col" id="title" class="author column-title">Title</th>
-            <th scope="col" id="status" class="author column-author" >Status</th>
-			<!-- <th scope="col" id="status" class="author column-author" style="width:100px;">Action</th> -->
+            <th scope="col" id="status" class="author column-author"  style="width:100px;">Status</th>
         </tr>
     </thead>
 
@@ -119,8 +118,6 @@ if (!empty($call)) {
             	"</td>";
             echo '<td class="author column-author">' . get_only_link_for_state($theTask['state'], $task_id) . "</td>";
             
-            //echo '<td class="author column-author">' . get_download_link_or_blank($theTask['state'], $link) . '</td>';
-            
             echo "</tr>";            
         }
     }
@@ -131,12 +128,3 @@ if (!empty($call)) {
     </tbody>
 </table>
 </form>
-
-<script type="text/javascript">
-/*
-function download_file(link, id){
-	var ifrm = document.getElementById("frame_" + id);
-    ifrm.src = path;
-}
-*/
-</script>
