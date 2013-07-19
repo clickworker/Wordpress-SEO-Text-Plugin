@@ -80,8 +80,7 @@ if (isset($_POST['accept']) || isset($_POST['reject'])) {
          require_once(ABSPATH . 'wp-admin/admin-header.php');         
      }     
      
-     }
-     
+}  
      
 display_warnings();
 ?>          
@@ -91,29 +90,17 @@ display_warnings();
 <h2>Order Status</h2>
 <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]?>&noheader=true" >
 <table class="wp-list-table widefat fixed posts" cellspacing="0"  style="width: 50%;">
-
-
-
     <thead>
-
         <tr>
-
-            <th scope="col" id="title" class="manage-column column-title sortable desc" style="">Title</th>
-
-            <th scope="col" id="status" class="manage-column column-author sortable desc" style="width:200px;">Status</th>
-
-
-
+            <th scope="col" id="title" class="author column-title">Title</th>
+            <th scope="col" id="status" class="author column-author" >Status</th>
+			<!-- <th scope="col" id="status" class="author column-author" style="width:100px;">Action</th> -->
         </tr>
-
     </thead>
 
     <tbody id="cw_price">
-
-
 <?php
 $call = cw_command("customer/tasks/", "GET");
-
 
 if (!empty($call)) {
     $arr = json_decode($call, true);
@@ -122,163 +109,34 @@ if (!empty($call)) {
         foreach ($tasks as $theTask) {
      
             $link =  $theTask['link'][0]['href'];
+            $task_id = get_id_from_link($link);
 
             echo '<tr id="post-7553" class="alternate author-other status-publish format-default iedit" valign="top">';
             echo "<tr>";
-            echo '<td class="post-title page-title column-title"><strong>' . $theTask['customer_ref'] . "</strong></td>";
-
-            echo '<td  class="author column-author">' . $theTask['state'] . "</td>";
-            echo "</tr>";
+            
+            echo '<td class="post-title page-title column-title"><strong>' . $theTask['customer_ref'] . "</strong>".
+            	"<div style='display: none;' id='task_" . $task_id . "'>" . get_link_for_state($theTask['state'], $task_id) . "</div>" .
+            	"</td>";
+            echo '<td class="author column-author">' . get_only_link_for_state($theTask['state'], $task_id) . "</td>";
+            
+            //echo '<td class="author column-author">' . get_download_link_or_blank($theTask['state'], $link) . '</td>';
+            
+            echo "</tr>";            
         }
     }
 } else {
     echo "Error while retrieving API data";
 }
 ?>
-
     </tbody>
-
 </table>
+</form>
 
-<br/>
-<h2>Customer Jobs</h2>
-<?php
-$call = cw_command("customer/jobs/", "GET");
-if (!empty($call)) {
-    $arr = json_decode($call, true);
-    $jobs = $arr['jobs_response']['jobs'];
-    $divNumber = 0;
-    if (count($jobs) > 0) {
-        foreach ($jobs as $job) {      
-            $call = cw_command($job['link'][0]['href'], "GET","",true);
-            $arr = json_decode($call, true);
-            ?>
-            <br />
-            <a  onclick="jQuery('#main<?php echo $divNumber; ?>').toggle();" id="xmain<?php echo $divNumber; ?>">[+]</a> <strong><?php echo $arr['job_response']['job']['items'][0]['content']; ?></strong>
-            <div id="main<?php echo $divNumber;
-            ++$divNumber; ?>" style="margin-left:1em; display: none;">
-                <h3><?php echo $arr['job_response']['job']['items'][0]['content']; ?></h3>
-                <span class="margin"><?php echo $arr['job_response']['job']['items'][1]['content']; ?></span><br /><br />
-                    <input type="hidden" name="job_id" id="job_id" value="<?php echo $arr['job_response']['job']['link'][0]['href']; ?>" />
-                    <input type="hidden" name="post_title" id="post_title" value="<?php echo $arr['job_response']['job']['items'][0]['content']; ?>" />
-                    <input type="hidden" name="post_content" id="post_content" value="<?php echo $arr['job_response']['job']['items'][1]['content']; ?>" />
-                    <label for="spelling_score">Spelling/Grammar:</label>
-                    <select name="spelling_score" id="spelling_score">
-                        <option value="0">poor</option>
-                        <option value="1">acceptable</option>
-                        <option value="2" selected="selected">good</option>                     
-                    </select><br />
-                    <label for="style_score">Style and Structure:</label>
-                    <select name="style_score" id="style_score">
-                        <option value="0">poor</option>
-                        <option value="1">acceptable</option>
-                        <option value="2" selected="selected">good</option>                   
-                    </select><br />
-                    <label for="topic_score">Topic met?</label>
-                    <select name="topic_score" id="topic_score">
-                        <option value="0">no</option>
-                        <option value="1">more or less</option>
-                        <option value="2" selected="selected">yes</option>                  
-                    </select><br />
-                    <label for="comment">Comment:</label>
-                    <textarea id="comment" name="comment"></textarea>
-                    <br />                    
-                    <input type="submit" name="accept" id="accept" value="Accept" />
-                    <input type="submit" name="reject" id="reject" value="Reject" />
-                
-            </div>
-
-            <?php
-        }
-    }
-} else {
-    echo "Error while retrieving API Data";
-}
-
-
-
+<script type="text/javascript">
 /*
-
-
-
-  <table class="wp-list-table widefat fixed posts" cellspacing="0"  style="width: 50%;">
-
-
-
-  <thead>
-
-  <tr>
-
-  <th scope="col" id="title" class="manage-column column-title sortable desc" style=""><a href="http://localhost:8888/wp-admin/edit.php?orderby=title&amp;order=asc"><span>Titel</span><span class="sorting-indicator"></span></a></th>
-
-  <th scope="col" id="author" class="manage-column column-author sortable desc" style=""><a href="http://localhost:8888/wp-admin/edit.php?orderby=author&amp;order=asc"><span>Status</span><span class="sorting-indicator"></span></a></th>
-
-  <th scope="col" id="categories" class="manage-column column-categories sortable desc" style=""><a href="http://localhost:8888/wp-admin/edit.php?orderby=author&amp;order=asc"><span>Datum</span><span class="sorting-indicator"></span></a></th>
-
-  <th scope="col" id="cb" class="manage-column column-cb check-column" style=""><input type="checkbox"></th>
-
-  </tr>
-
-  </thead>
-
-
-
-
-
-  <tbody id="cw_price">
-
-  <tr id="post-7553" class="alternate author-other status-publish format-default iedit" valign="top">
-
-  <td class="post-title page-title column-title"><strong>Task Name Lorem Ipsum</strong></td>
-
-  <td class="author column-author">running</td>
-
-  <td class="categories column-categories">10. June 2011</td>
-
-  <th scope="row" class="check-column"><input type="checkbox" name="post[]" value="7553"></th>
-
-  </tr>
-
-  <tr id="post-7553" class="author-other status-draft format-default iedit" valign="top">
-
-  <td class="post-title page-title column-title"><strong>Task Name Lorem Ipsum</strong></td>
-
-  <td class="author column-author">running</td>
-
-  <td class="categories column-categories">10. June 2011</td>
-
-  <th scope="row" class="check-column"><input type="checkbox" name="post[]" value="7553"></th>
-
-  </tr>
-
-  <tr id="post-7553" class="alternate author-other status-publish format-default iedit" valign="top">
-
-  <td class="post-title page-title column-title"><strong>Task Name Lorem Ipsum</strong></td>
-
-  <td class="author column-author">running</td>
-
-  <td class="categories column-categories">10. June 2011</td>
-
-  <th scope="row" class="check-column"><input type="checkbox" name="post[]" value="7553"></th>
-
-  </tr>
-
-  <tr id="post-7553" class="author-other status-draft format-default iedit" valign="top">
-
-  <td class="post-title page-title column-title"><strong>Task Name Lorem Ipsum</strong></td>
-
-  <td class="author column-author">running</td>
-
-  <td class="categories column-categories">10. June 2011</td>
-
-  <th scope="row" class="check-column"><input type="checkbox" name="post[]" value="7553"></th>
-
-  </tr>
-
-  </tbody>
-
-
-
-  </table>
- */
-?></form>
+function download_file(link, id){
+	var ifrm = document.getElementById("frame_" + id);
+    ifrm.src = path;
+}
+*/
+</script>

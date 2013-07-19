@@ -4,12 +4,11 @@
   Plugin Name: Clickworker SEO Texts
   Plugin URI: https://github.com/clickworker/Wordpress-SEO-Text-Plugin
   Description: Order and buy Content created by clickworker.com
-  Version: 0.95
-  Author: clickworker.com
-  Author URI: http://www.clickworker.com/about-us/team
+  Version: 0.96
+  Author: W. Krieger
+  Author URI: http://www.clickworker.com/
 
-  Prototype by: S.D.Moufarrege
-  Copyright (c) 2011 humangrid GmbH
+  Copyright (c) 2013 humangrid GmbH
 
   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
   The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
@@ -17,7 +16,7 @@
  */
 
 if (!defined('VERSION'))
-    define('VERSION', "0.95");
+    define('VERSION', "0.96");
 
 //check for/ right scope
 
@@ -40,7 +39,7 @@ if (!defined('Clickworker_SEO_Capability'))
 // Sandbox: https://sandbox.clickworker.com/api/marketplace/v2/
 // Sandbox beta: https://sandbox-beta.clickworker.com/api/marketplace/v2/
 if (!defined('CW_SERVER'))
-    define('CW_SERVER', "api.clickworker.com");
+define('CW_SERVER', "api.clickworker.com");
 
 // path to the api
 if (!defined('API_PATH'))
@@ -74,7 +73,7 @@ function getOptions() {
  * Parameters: target url, httpmethod, data, boolean long url with http?
  * Returns: JSON response on succes, empty string on failure
  * */
-function cw_command($url, $method, $data="", $longurl = false) {
+function cw_command($url, $method, $data="", $longurl = false) { 
     global $warnings;
     $options = getOptions();
     $username = $options['clickworker_username'];
@@ -148,7 +147,7 @@ function customer_check() {
 
     if (!empty($customer)) {
         $customer['username'] = $settings['clickworker_username'];
-        $balance = $customer['customer_response']['customer']['$balance'];
+        $balance = $customer['customer_response']['customer']['balance_amount'];
 
         if ($settings['clickworker_lowcredits'] == 'true' && $balance < 10) { // change to a more suitable number once we are sure this works
                array_push($warnings, "The balance on your Clickworker account is running low. Be sure to log into Clickworker to increase your balance.");
@@ -173,6 +172,8 @@ function clickworker_seo_menu() {
         add_submenu_page("clickworker_seo", 'Clickworker SEO Charge Account', 'Charge Account', Clickworker_SEO_Capability, "clickworker_seo_charge", 'charge_page');
 
         add_submenu_page("clickworker_seo", 'Clickworker SEO Order Status', 'Order Status', Clickworker_SEO_Capability, "clickworker_seo_status", 'status_page');
+
+        //add_submenu_page("clickworker_seo", 'Clickworker SEO Task Download', '', Clickworker_SEO_Capability, "clickworker_task_download", 'download_page');
     }
 }
 
@@ -232,7 +233,11 @@ function status_page() {
 function price_page() {
     page('status');
 }
-
+/*
+function download_page() {
+	page('download');
+}
+*/
 function charge_page() {
     page('charge');
 }
