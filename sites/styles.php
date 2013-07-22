@@ -83,6 +83,14 @@
 		line-height: 40px;
 
 	}
+	
+	.bordered_div{
+		border: 1px solid #c0c0c0;
+		background-color: #F0F0F0;
+		padding: 10px 15px;
+		margin-left: 15px;
+		
+	}
 
 -->
 </style>
