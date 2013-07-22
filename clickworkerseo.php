@@ -4,12 +4,11 @@
   Plugin Name: Clickworker SEO Texts
   Plugin URI: https://github.com/clickworker/Wordpress-SEO-Text-Plugin
   Description: Order and buy Content created by clickworker.com
-  Version: 0.95
-  Author: clickworker.com
-  Author URI: http://www.clickworker.com/about-us/team
+  Version: 0.96
+  Author: W. Krieger
+  Author URI: http://www.clickworker.com/
 
-  Prototype by: S.D.Moufarrege
-  Copyright (c) 2011 humangrid GmbH
+  Copyright (c) 2013 humangrid GmbH
 
   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
   The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
@@ -17,7 +16,7 @@
  */
 
 if (!defined('VERSION'))
-    define('VERSION', "0.95");
+    define('VERSION', "0.96");
 
 //check for/ right scope
 
@@ -40,7 +39,7 @@ if (!defined('Clickworker_SEO_Capability'))
 // Sandbox: https://sandbox.clickworker.com/api/marketplace/v2/
 // Sandbox beta: https://sandbox-beta.clickworker.com/api/marketplace/v2/
 if (!defined('CW_SERVER'))
-    define('CW_SERVER', "api.clickworker.com");
+define('CW_SERVER', "api.clickworker.com");
 
 // path to the api
 if (!defined('API_PATH'))
@@ -74,7 +73,7 @@ function getOptions() {
  * Parameters: target url, httpmethod, data, boolean long url with http?
  * Returns: JSON response on succes, empty string on failure
  * */
-function cw_command($url, $method, $data="", $longurl = false) {
+function cw_command($url, $method, $data="", $longurl = false) { 
     global $warnings;
     $options = getOptions();
     $username = $options['clickworker_username'];
@@ -148,7 +147,7 @@ function customer_check() {
 
     if (!empty($customer)) {
         $customer['username'] = $settings['clickworker_username'];
-        $balance = $customer['customer_response']['customer']['$balance'];
+        $balance = $customer['customer_response']['customer']['balance_amount'];
 
         if ($settings['clickworker_lowcredits'] == 'true' && $balance < 10) { // change to a more suitable number once we are sure this works
                array_push($warnings, "The balance on your Clickworker account is running low. Be sure to log into Clickworker to increase your balance.");
@@ -237,6 +236,91 @@ function charge_page() {
     page('charge');
 }
 
+function get_link_for_state($state, $link){
+	$id = get_id_from_link($link);
+	$download_link = "&nbsp;";
+
+	if($state == "feedback")
+	{
+		$download_link = get_link_to_accept($id);
+	}
+
+	return $download_link;
+}
+
+function get_only_link_for_state($state, $div_task_id){
+	$label = $state;
+
+	if($state == "feedback"){
+		$label = "<a onclick='jQuery(\"#task_$div_task_id\").toggle(\"slow\");'><strong>review needed</strong></a>";
+	}
+	return $label;
+}
+
+function get_link_to_accept($id){
+	$link = "";
+
+	$call = cw_command("customer/jobs/", "GET");
+	if (!empty($call)) {
+		$arr = json_decode($call, true);
+		$jobs = $arr['jobs_response']['jobs'];
+
+		$divNumber = 0;
+		if (count($jobs) > 0) {
+			foreach ($jobs as $job) {
+				$call = cw_command($job['link'][0]['href'], "GET","",true);
+				$arr = json_decode($call, true);
+
+				if(get_id_from_link($job['task']['link'][0]['href']) != $id){ continue; }
+				 
+				$link .= "<strong>". $arr['job_response']['job']['items'][0]['content'] . "</strong>";
+				$link .= "<div id=\"task_$id\" style=\"margin-left:1em;\">";
+
+				$link .= "<label for='spelling_score'>Result:</label>";
+	      
+				$link .= "<div class='bordered_div'>" . $arr['job_response']['job']['items'][1]['content'] . "</div>";
+				 
+						$link .= "<input type='hidden' name='job_id' id='job_id' value=' " . $arr['job_response']['job']['link'][0]['href'] . "' />" .
+								"<input type='hidden' name='post_title' id='post_title' value='" . $arr['job_response']['job']['items'][0]['content'] . "' />" .
+								"<input type='hidden' name='post_content' id='post_content' value='" . $arr['job_response']['job']['items'][1]['content'] . "' />";
+
+										$link .= "<label for='spelling_score'>Spelling/Grammar:</label>
+				<select name='spelling_score' id='spelling_score'>
+					  		<option value='0'>poor</option>
+					  		<option value='1'>acceptable</option>
+					  		<option value='2' selected='selected'>good</option>
+				  		</select><br />
+			  		<label for='style_score'>Style and Structure:</label>
+			  		<select name='style_score' id='style_score'>
+				  		<option value='0'>poor</option>
+				  		<option value='1'>acceptable</option>
+				  		<option value='2' selected='selected'>good</option>
+                    </select><br />
+                    <label for='topic_score'>Topic met?</label>
+                    <select name='topic_score' id='topic_score'>
+                        <option value='0'>no</option>
+                        <option value='1'>more or less</option>
+                        <option value='2' selected='selected'>yes</option>
+                    </select><br />
+                    <label for='comment'>Comment:</label>
+                    <textarea id='comment' name='comment'></textarea>
+                    <br />
+                    <input type='submit' name='accept' id='accept' value='Accept' />
+                    <input type='submit' name='reject' id='reject' value='Reject' />
+  				</div>";
+			}
+	    }
+	} else {
+	    $link = "Error while retrieving API Data";
+	}
+
+	return $link;
+}
+
+function get_id_from_link($link){
+	$exploded = split('/', $link);
+				return ($exploded[sizeof($exploded) - 1]);
+}
 
 
 ?>
