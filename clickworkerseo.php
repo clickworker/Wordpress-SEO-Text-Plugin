@@ -4,7 +4,7 @@
   Plugin Name: Clickworker SEO Texts
   Plugin URI: https://github.com/clickworker/Wordpress-SEO-Text-Plugin
   Description: Order and buy Content created by clickworker
-  Version: 0.96
+  Version: 0.97
   Author: W. Krieger
   Author URI: http://www.clickworker.com/
 
@@ -16,7 +16,7 @@
  */
 
 if (!defined('VERSION'))
-    define('VERSION', "0.96");
+    define('VERSION', "0.97");
 
 //check for/ right scope
 
