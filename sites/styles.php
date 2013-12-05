@@ -89,7 +89,7 @@
 		background-color: #F0F0F0;
 		padding: 10px 15px;
 		margin-left: 15px;
-		
+		line-height:1.5em;
 	}
 
 -->
